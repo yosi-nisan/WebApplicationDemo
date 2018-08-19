@@ -1,0 +1,21 @@
+﻿
+@using System.Web.Optimization
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>דוגמא</title>
+    <script>
+        var theRoot = '@*@Url.Content("~/")*@';
+    </script>
+    @Styles.Render("~/libs/css") 
+    @Scripts.Render("~/libs/js")
+    @Scripts.Render("~/site/js")
+</head>
+<body ng-controller="mainCtrl">
+    <div class="container">
+        <ui-view></ui-view>
+    </div>
+   
+</body>
+</html>

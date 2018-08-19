@@ -1,0 +1,33 @@
+﻿
+<div ng-controller="searchingCtrl">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." ng-model="txtForSearch" rdn-Enter-Key="searchFromGithub()">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="searchFromGithub()">Go!</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <button class="btn btn-default" type="button" ng-click="getUsersFromSession()">Display From Session</button>
+    </div><!-- /.row -->
+    <hr />
+    <div ng-show="data.items.length > 0" class="row well well-sm">
+        <div class="col-md-3 col-sm-4 col-xs-12 card" ng-repeat="item in data.items">
+            <div class="thumbnail bg-primary">
+                <img ng-src="{{isSession ? item.avatar_url : item.owner.avatar_url}}" alt="Lights" style="width:100%">
+                <div class="caption">
+                    <dl>
+                        <dt>Name</dt>
+                        <dd>{{item.name}}</dd>
+                        <dt>Updated</dt>
+                        <dd>{{item.updated_at | date:'medium'}}</dd>
+                    </dl>
+                    <button ng-hide="isSession" class="btn btn-info btn-xs" ng-click="addUserInSession(item)">Save User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
