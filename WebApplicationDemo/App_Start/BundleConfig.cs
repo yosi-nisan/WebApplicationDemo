@@ -16,7 +16,8 @@ namespace WebApplicationDemo
         {
             bundles.Add(new StyleBundle("~/libs/css")
                 .Include("~/Content/libs/bootstrap/css/bootstrap.css")
-                .Include("~/Content/libs/bootstrap/rtl/bootstrap-rtl.css"));
+                .Include("~/Content/libs/bootstrap/rtl/bootstrap-rtl.css")
+                .Include("~/Content/Site.css"));
 
         }
 

@@ -107,8 +107,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Code\app\contrrollers\main.js" />
-    <Content Include="Content\Code\app\service\urls.js" />
     <Content Include="Content\libs\angular\0_angular.js" />
     <Content Include="Content\libs\angular\0_angular.min.js" />
     <Content Include="Content\libs\angular\angular-animate.js" />
@@ -135,6 +133,7 @@
     <Content Include="Content\libs\bootstrap\rtl\bootstrap-rtl.min.css" />
     <Content Include="Content\libs\jquery\jquery-2.2.4.js" />
     <Content Include="Content\libs\jquery\jquery-2.2.4.min.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -151,8 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <Content Include="Content\Code\app\contrrollers\main.js.map" />
-    <Content Include="Content\Code\app\service\urls.js.map" />
     <Content Include="Content\libs\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Content\libs\bootstrap\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\libs\bootstrap\css\bootstrap.css.map" />
@@ -170,6 +167,7 @@
     <Content Include="Views\Home\Example1.cshtml" />
     <Content Include="Views\Home\Example2.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

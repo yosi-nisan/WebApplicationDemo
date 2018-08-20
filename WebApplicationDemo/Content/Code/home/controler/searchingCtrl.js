@@ -17,6 +17,7 @@ var Account;
                 };
                 this.searchFromGithub = function () {
                     _this.$scope.isSession = false;
+                    _this.$scope.loading = true;
                     if (_this.$scope.txtForSearch == "") {
                         return;
                     }
@@ -26,6 +27,7 @@ var Account;
                             _this.$scope.data = res.data;
                             _this.saveStrInSession();
                         }
+                        _this.$scope.loading = false;
                     });
                 };
                 this.addUserInSession = function (user) {
@@ -41,9 +43,11 @@ var Account;
                 };
                 this.getUsersFromSession = function () {
                     _this.$scope.isSession = true;
+                    _this.$scope.loading = true;
                     _this.$http.get(_this.urls.home.getUsersFromSession)
                         .then(function (res) {
                         _this.$scope.data.items = res.data.value;
+                        _this.$scope.loading = false;
                     });
                 };
                 this.saveStrInSession = function () {

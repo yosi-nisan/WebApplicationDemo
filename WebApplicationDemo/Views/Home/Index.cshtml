@@ -11,12 +11,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a ui-sref="home">Home</a></li>
-                <li><a ui-sref="example1">About</a></li>
-                <li><a ui-sref="example2">Contact</a></li>
+                <li ui-sref-active="active"><a ui-sref="app.example1">Search</a></li>
+                <li ui-sref-active="active"><a ui-sref="app.example2">page 2</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
-</nav>
-
-<ui-view></ui-view>
+</nav> 
+<ui-view>
+</ui-view>

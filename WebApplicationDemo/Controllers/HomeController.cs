@@ -77,7 +77,6 @@ namespace WebApplicationDemo.Controllers
                 }
                 return objects;
             }
-
             set // Do you still need this setter?
             {
                 System.Web.HttpContext.Current.Session["search"] = value;
@@ -88,18 +87,18 @@ namespace WebApplicationDemo.Controllers
         {
             get
             {
-                List<User> objects = (List<User>)System.Web.HttpContext.Current.Session["userSession"];
+                List<User> objects = (List<User>)System.Web.HttpContext.Current.Session["usersSession"];
                 if (objects == null)
                 {
                     objects = new List<User>();
-                    System.Web.HttpContext.Current.Session["userSession"] = objects; // Store the new list in the session object!
+                    System.Web.HttpContext.Current.Session["usersSession"] = objects; // Store the new list in the session object!
                 }
                 return objects;
             }
 
             set // Do you still need this setter?
             {
-                System.Web.HttpContext.Current.Session["userSession"] = value;
+                System.Web.HttpContext.Current.Session["usersSession"] = value;
             }
         }
 

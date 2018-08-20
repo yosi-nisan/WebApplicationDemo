@@ -1,11 +1,12 @@
 ﻿namespace Account.Controller {
-    interface ILogin extends ng.IScope {
+    interface ISearching extends ng.IScope {
         searchFromGithub();
         addUserInSession(user)
         getUsersFromSession()
         isSession: boolean;
         allData: any;
         txtForSearch: string;
+        loading: boolean;
     }
 
     export class SearchingCtrl {
@@ -13,7 +14,7 @@
         static $inject = ["$scope", "$http", 'urls'];
         static ctrlName = 'searchingCtrl';
 
-        constructor(private $scope: ILogin,
+        constructor(private $scope: ISearching,
             private $http: ng.IHttpService,
             private urls: App.Service.Urls) {
             this.init();
@@ -29,21 +30,23 @@
 
         searchFromGithub = () => {
             this.$scope.isSession = false;
+            this.$scope.loading = true;
+
             if (this.$scope.txtForSearch == "") {
                 return
             }
+
             this.$http.get(this.urls.home.githubSearch + "?q=" + this.$scope.txtForSearch)
                 .then((res: any) => {
                     if (res.status == 200) {
                         this.$scope.data = res.data;
                         this.saveStrInSession();
                     }
+                    this.$scope.loading = false;
                 });
-
         }
 
         addUserInSession = (user: any) => {
-
             let data = new Infra.Model.user;
             data.id = user.id;
             data.name = user.name;
@@ -58,9 +61,13 @@
 
         getUsersFromSession = () => {
             this.$scope.isSession = true;
+            this.$scope.loading = true;
+
             this.$http.get(this.urls.home.getUsersFromSession)
                 .then((res: any) => {
                     this.$scope.data.items = res.data.value;
+                    this.$scope.loading = false;
+
                 });
         }
 
