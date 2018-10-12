@@ -11,26 +11,41 @@ var App;
                     this.$http = $http;
                     this.urls = urls;
                     this.init = function () {
+                        _this.getAllFromSession();
                         _this.$scope.data = new Array();
                         _this.$scope.getAllFromSession = _this.getAllFromSession;
-                        _this.$scope.addTaskInSession = _this.addTaskInSession;
+                        _this.$scope.addTaskToSession = _this.addTaskToSession;
                         _this.$scope.deletedTaskFromSession = _this.deletedTaskFromSession;
+                        _this.$scope.updateTask = _this.updateTask;
                     };
                     this.getAllFromSession = function () {
                         _this.$scope.isSession = true;
                         _this.$http.get(_this.urls.home.getAllFromSession)
                             .then(function (res) {
                             _this.$scope.data = res.data.value;
+                            if (res.data.value.length < 1) {
+                                alert("אין משימות");
+                            }
                         });
                     };
-                    this.addTaskInSession = function (task) {
-                        _this.$http.post(_this.urls.home.addTaskInSession, { task: task })
+                    this.addTaskToSession = function () {
+                        _this.$http.post(_this.urls.home.addTaskInSession, { task: _this.$scope.task })
                             .then(function (res) {
+                            _this.$scope.task = new Infra.Model.Task();
+                            _this.$scope.data = res.data.value;
+                            console.log(res.data.value);
+                        });
+                    };
+                    this.deletedTaskFromSession = function (name) {
+                        _this.$http.post(_this.urls.home.deletedTaskFromSession, { name: name })
+                            .then(function (res) {
+                            _this.$scope.data = res.data.value;
                             console.log(res);
                         });
                     };
-                    this.deletedTaskFromSession = function (id) {
-                        _this.$http.post(_this.urls.home.deletedTaskFromSession, id)
+                    this.updateTask = function (task) {
+                        task.update = false;
+                        _this.$http.post(_this.urls.home.updateTask, task)
                             .then(function (res) {
                             console.log(res);
                         });
@@ -39,7 +54,7 @@ var App;
                 }
                 ;
                 TaskCtrl.$inject = ["$scope", "$http", 'urls'];
-                TaskCtrl.ctrlName = 'searchingCtrl';
+                TaskCtrl.ctrlName = 'tasksCtrl';
                 return TaskCtrl;
             }());
             Controller.TaskCtrl = TaskCtrl;
@@ -47,4 +62,4 @@ var App;
         })(Controller = Home.Controller || (Home.Controller = {}));
     })(Home = App.Home || (App.Home = {}));
 })(App || (App = {}));
-//# sourceMappingURL=searchingCtrl.js.map
+//# sourceMappingURL=tasksCtrl.js.map

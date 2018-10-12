@@ -34,73 +34,70 @@ namespace WebApplicationDemo.Controllers
 
         #endregion
 
-        #region actions
-        public ActionResult AddStrSearchToSession(string str)
+        #region Actions
+        public ActionResult GetAllFromSession()
         {
-            var list = MySession;
-            if (!list.Any(x => x.Contains(str)))
-            {
-                list.Add(str);
-                MySession = list;
-            }
-
-            return Success(MySession);
+            return Success(TasksSession);
         }
 
-        public ActionResult AddUserInSession(User user)
+        public ActionResult AddTaskInSession(TasksDTO task)
         {
-            var list = UserSession;
-            if (list.FindIndex(f => f.Id == user.Id) < 0)
+            var list = TasksSession;
+            if (list.FindIndex(f => f.Name == task.Name) < 0)
             {
-                list.Add(user);
-                UserSession = list;
+                list.Add(task);
+                TasksSession = list;
             }
-            return Success(UserSession);
+            return Success(TasksSession);
         }
 
-        public ActionResult GetUsersFromSession()
+        public ActionResult DeletedTaskFromSession(string name)
         {
-            return Success(UserSession);
+            var list = TasksSession;
+
+            var toDel = list.FirstOrDefault(f => f.Name == name);
+            if (toDel != null)
+            {
+                list.Remove(toDel);
+                TasksSession = list;
+            };
+            return Success(TasksSession);
+        }
+
+        public ActionResult UpdateTask(TasksDTO task)
+        {
+            var list = TasksSession;
+
+             var toUpdate = list.FirstOrDefault(f => f.Name == task.Name);
+            if (toUpdate != null)
+            {
+                list.FirstOrDefault(f => f.Name == task.Name).Desc = task.Desc;
+                TasksSession = list;
+            };
+            return Success(TasksSession);
         }
 
         #endregion
 
-        private static List<string> MySession
+        #region Session
+        private static List<TasksDTO> TasksSession
         {
             get
             {
-                List<string> objects = (List<string>)System.Web.HttpContext.Current.Session["search"];
+                List<TasksDTO> objects = (List<TasksDTO>)System.Web.HttpContext.Current.Session["TasksSession"];
                 if (objects == null)
                 {
-                    objects = new List<string>();
-                    System.Web.HttpContext.Current.Session["search"] = objects; // Store the new list in the session object!
-                }
-                return objects;
-            }
-            set // Do you still need this setter?
-            {
-                System.Web.HttpContext.Current.Session["search"] = value;
-            }
-        }
-
-        private static List<User> UserSession
-        {
-            get
-            {
-                List<User> objects = (List<User>)System.Web.HttpContext.Current.Session["usersSession"];
-                if (objects == null)
-                {
-                    objects = new List<User>();
-                    System.Web.HttpContext.Current.Session["usersSession"] = objects; // Store the new list in the session object!
+                    objects = new List<TasksDTO>();
+                    System.Web.HttpContext.Current.Session["TasksSession"] = objects; // Store the new list in the session object!
                 }
                 return objects;
             }
 
             set // Do you still need this setter?
             {
-                System.Web.HttpContext.Current.Session["usersSession"] = value;
+                System.Web.HttpContext.Current.Session["TasksSession"] = value;
             }
         }
-
+        #endregion
     }
 }

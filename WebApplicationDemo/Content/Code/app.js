@@ -1,7 +1,11 @@
 var App;
 (function (App) {
     App.moduleName = 'app';
-    var app = angular.module(App.moduleName, ['ui.router', 'home', 'infra']);
+    var app = angular.module(App.moduleName, [
+        'ui.router',
+        'home',
+        'infra'
+    ]);
     app.config(theConfig);
     app.run(['$rootScope', '$state', theRun]);
     function theConfig($state, router, urls) {

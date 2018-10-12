@@ -1,10 +1,9 @@
 ﻿namespace WebApplicationDemo.Models
 {
-    public class User
+    public class TasksDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Updated_at { get; set; }
-        public string Avatar_url { get; set; }
+        public string Desc { get; set; }
     }
 }

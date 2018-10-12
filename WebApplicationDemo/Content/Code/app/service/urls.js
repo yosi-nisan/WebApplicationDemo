@@ -10,9 +10,10 @@ var App;
                     example1: this.root + '/Home/Example1',
                     example2: this.root + '/Home/Example2',
                     addStrSearchToSession: this.root + '/Home/AddStrSearchToSession',
-                    addUserInSession: this.root + '/Home/AddUserInSession',
-                    getUsersFromSession: this.root + '/Home/GetUsersFromSession',
-                    githubSearch: 'https://api.github.com/search/repositories'
+                    getAllFromSession: this.root + '/Home/GetAllFromSession',
+                    addTaskInSession: this.root + '/Home/AddTaskInSession',
+                    deletedTaskFromSession: this.root + '/Home/DeletedTaskFromSession',
+                    updateTask: this.root + '/Home/UpdateTask',
                 };
             }
             Object.defineProperty(Urls.prototype, "root", {

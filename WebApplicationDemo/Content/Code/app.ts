@@ -2,7 +2,11 @@
 
     export const moduleName = 'app';
 
-    var app = angular.module(moduleName, ['ui.router', 'home','infra']);
+    var app = angular.module(moduleName, [
+        'ui.router',
+        'home',
+        'infra'
+    ]);
 
     app.config(theConfig);
     app.run(['$rootScope', '$state', theRun]);

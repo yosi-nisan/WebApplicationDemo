@@ -1,34 +1,37 @@
 ﻿
-<div ng-controller="searchingCtrl">
+<div ng-controller="tasksCtrl">
     <div class="row">
-        <div class="col-lg-6">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for..." ng-model="txtForSearch" rdn-Enter-Key="searchFromGithub()">
-                <span class="input-group-btn">
-                    <button ng-disabled="!txtForSearch" class="btn btn-default" type="button" ng-click="searchFromGithub()">Go!</button>
-                </span>
-            </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-        <button class="btn btn-default" type="button" ng-click="getUsersFromSession()">Display From Session</button>
-    </div><!-- /.row -->
-    <hr />
-    <div ng-class="{'spinner' : loading }"></div>
-        <div ng-show="data.items.length > 0  && !loading" class="row well well-sm">
-            <div class="col-md-3 col-sm-4 col-xs-12 card" ng-repeat="item in data.items">
-                <div class="thumbnail bg-primary">
-                    <img ng-src="{{isSession ? item.avatar_url : item.owner.avatar_url}}" alt="Lights" style="width:100%">
-                    <div class="caption">
-                        <dl>
-                            <dt>Name</dt>
-                            <dd>{{item.name}}</dd>
-                            <dt>Updated</dt>
-                            <dd>{{item.updated_at | date:'medium'}}</dd>
-                        </dl>
-                        <button ng-hide="isSession" class="btn btn-info btn-xs" ng-click="addUserInSession(item)">Save User</button>
-                    </div>
-                </div>
+        <div class="form-group col-xs-12 col-md-6">
+            <h1>משימות <small>הרשימה שלי</small></h1>
+            <div class="row">
+                <input type="text" class="form-control col-xs-5" placeholder="Your Task" name="task" required ng-model="task.name">
+                <input type="text" class="form-control col-xs-5" placeholder="Your Description" name="description" ng-model="task.desc">  <button type="button" class="btn btn-primary col-xs-2" ng-click="addTaskToSession()">הוסף</button>
             </div>
+
+        </div>
+    </div>
+        <div class="row">
+            <ul class="list-unstyled col-xs-12 col-md-6" id="todo">
+                <li ng-repeat="t in data" ng-init="t.update = false">
+                    <span class="label label-primary text-left">{{t.name}}</span>
+                    <span class="label label-default" ng-show="!t.update">{{t.desc}}</span>
+                    <input ng-show="t.update" type="text" ng-model="t.desc" />
+                    <a href="#" class="close" aria-hidden="true" ng-show="!t.update" ng-click="deletedTaskFromSession(t.name)"> &nbsp; מחיקה</a>
+                    <a href="#" class="close" aria-hidden="true" ng-show="!t.update" ng-click="t.update = true ">עריכה</a>
+                    <a href="#" class="close" aria-hidden="true" ng-show="t.update" ng-click="updateTask(t); t.update = false">שמור</a>
+                </li>
+            </ul>
         </div>
     </div>
 
 
+    <style>
+            .form-group {
+                padding-bottom: 25px;
+            }
+
+        a.close {
+            float: left;
+            font-size: 15px
+        }
+    </style>
